@@ -1,2 +1,0 @@
-# Wishlist.github.io
-WishList
