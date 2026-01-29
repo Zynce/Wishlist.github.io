@@ -146,33 +146,46 @@
     </div>
 
     <section class="grid" id="cards">
-      <!-- Пример карточки. Копируй и меняй -->
-      <article class="card" data-search="пвз озон москва">
-        <h3>ПВЗ Ozon</h3>
-        <div class="address">г. Москва, ул. Примерная, д. 10</div>
+      <article class="card" data-search="вайлдберриз wildberries железноводск проскурина 45">
+        <h3>ПВЗ Wildberries</h3>
+        <div class="address">г. Железноводск, ул. Проскурина, д. 45</div>
         <div class="tags">
-          <span class="tag">Ozon</span>
-          <span class="tag">Круглосуточно</span>
+          <span class="tag">Wildberries</span>
+          <span class="tag">ПВЗ</span>
         </div>
       </article>
 
-      <article class="card" data-search="постамат яндекс">
-        <h3>Постамат Яндекс Маркет</h3>
-        <div class="address">г. Санкт‑Петербург, Невский пр., д. 25</div>
+      <article class="card" data-search="озон ozon железноводск проскурина 45">
+        <h3>ПВЗ Ozon</h3>
+        <div class="address">г. Железноводск, ул. Ленина, д. 169</div>
         <div class="tags">
-          <span class="tag">Яндекс</span>
-          <span class="tag">Постамат</span>
+          <span class="tag">Ozon</span>
+          <span class="tag">ПВЗ</span>
+        </div>
+      </article>
+
+      <article class="card" data-search="яндекс маркет железноводск ленина 169">
+        <h3>ПВЗ Яндекс Маркет</h3>
+        <div class="address">г. Железноводск, ул. Ленина, д. 169</div>
+        <div class="tags">
+          <span class="tag">Яндекс Маркет</span>
+          <span class="tag">ПВЗ</span>
+        </div>
+      </article>
+
+      <article class="card" data-search="почта россии железноводск чапаева 27 357401">
+        <h3>Почта России</h3>
+        <div class="address">г. Железноводск, ул. Чапаева, д. 27</div>
+        <div class="tags">
+          <span class="tag">Почта России</span>
+          <span class="tag">Индекс 357401</span>
         </div>
       </article>
     </section>
   </main>
 
-  <footer>
-    <div>Сайт статический · отлично подходит для GitHub Pages</div>
-  </footer>
 
   <script>
-    // Поиск
     const search = document.getElementById('search');
     const cards = document.querySelectorAll('.card');
 
@@ -184,7 +197,6 @@
       });
     });
 
-    // Эффект подсветки при движении мыши
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
