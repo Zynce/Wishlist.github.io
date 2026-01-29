@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist — Пункты выдачи</title>
+  <meta name="description" content="Адреса и пункты выдачи для моего вишлиста" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1220;
+      --card: #181c3a;
+      --accent: #6c8cff;
+      --accent-2: #9bffd9;
+      --text: #e8e9ff;
+      --muted: #a5a7d6;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1b1f4b, transparent),
+                  radial-gradient(1000px 500px at 90% 10%, #0d3a3a, transparent),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .controls input {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: none;
+      background: #0c0f2a;
+      color: var(--text);
+      outline: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)), var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px 200px at var(--x, 50%) var(--y, 50%), rgba(108,140,255,0.18), transparent 40%);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .card .address {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(155,255,217,0.15);
+      color: var(--accent-2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 16px 48px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Wishlist · Пункты выдачи</h1>
+    <p>Здесь собраны адреса и пункты выдачи, куда можно отправлять подарки из моего вишлиста.</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Поиск по адресу или названию…" />
+    </div>
+
+    <section class="grid" id="cards">
+      <!-- Пример карточки. Копируй и меняй -->
+      <article class="card" data-search="пвз озон москва">
+        <h3>ПВЗ Ozon</h3>
+        <div class="address">г. Москва, ул. Примерная, д. 10</div>
+        <div class="tags">
+          <span class="tag">Ozon</span>
+          <span class="tag">Круглосуточно</span>
+        </div>
+      </article>
+
+      <article class="card" data-search="постамат яндекс">
+        <h3>Постамат Яндекс Маркет</h3>
+        <div class="address">г. Санкт‑Петербург, Невский пр., д. 25</div>
+        <div class="tags">
+          <span class="tag">Яндекс</span>
+          <span class="tag">Постамат</span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div>Сайт статический · отлично подходит для GitHub Pages</div>
+  </footer>
+
+  <script>
+    // Поиск
+    const search = document.getElementById('search');
+    const cards = document.querySelectorAll('.card');
+
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      cards.forEach(card => {
+        const text = card.dataset.search;
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+
+    // Эффект подсветки при движении мыши
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--x', `${e.clientX - r.left}px`);
+        card.style.setProperty('--y', `${e.clientY - r.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>
